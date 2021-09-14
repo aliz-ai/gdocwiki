@@ -35,7 +35,6 @@ jobs:
         run: yarn build
         env:
           CI: false
-          REACT_APP_USE_CONFIG_FILE: 1
           REACT_APP_GAPI_KEY: ${{ secrets.GAPI_KEY }}
           REACT_APP_GAPI_CLIENT_ID:  ${{ secrets.GAPI_CLIENT_ID }}
           REACT_APP_ROOT_ID:  ${{ secrets.ROOT_ID }}
