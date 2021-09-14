@@ -46,6 +46,6 @@ jobs:
         with:
           working_directory: ./packages/website
           credentials: ${{ secrets.GCP_CREDENTIALS }}
-          project-id: ${{ secrets.GCP_PROJECT_ID }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
           version: main
         
