@@ -16,7 +16,7 @@ handlers:
   http_headers:
     Access-Control-Allow-Origin: '*'
 
-- url: /.*
+- url: /(.*)
   static_files: build/index.html
   upload: build/index.html
   secure: always
