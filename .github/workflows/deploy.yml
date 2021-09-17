@@ -39,6 +39,7 @@ jobs:
           REACT_APP_GAPI_CLIENT_ID:  ${{ secrets.GAPI_CLIENT_ID }}
           REACT_APP_ROOT_ID:  ${{ secrets.ROOT_ID }}
           REACT_APP_ROOT_DRIVE_ID:  ${{ secrets.ROOT_DRIVE_ID }}
+          REACT_APP_NAME: "Aliz Wiki"
 
       - name: Deploy
         uses: google-github-actions/deploy-appengine@main
