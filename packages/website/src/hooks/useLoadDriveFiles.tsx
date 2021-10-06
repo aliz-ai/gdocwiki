@@ -172,7 +172,9 @@ export default function useLoadDriveFiles() {
           const rsp = await gapi.client.drive.drives.list({
             pageSize: 100,
           });
-          dispatch(setDrives(rsp.result.drives ?? []));
+          dispatch(
+            setDrives((rsp.result.drives ?? []).filter((drive) => drive.name?.includes('Wiki')))
+          );
         } catch (e) {
           console.error('getDrives', e);
         }
