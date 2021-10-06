@@ -29,12 +29,13 @@ export function useSearch(fieldName: string, queryBuilder: (value: string) => st
         for (let i = 0; i < 10; i++) {
           const resp = await gapi.client.drive.files.list({
             pageToken,
-            corpora: 'allDrives ',
+            corpora: 'drive',
             includeItemsFromAllDrives: true,
             supportsAllDrives: true,
             pageSize: 500,
             q: queryBuilderMemo(fieldValue),
             fields: getConfig().DEFAULT_FILE_FIELDS,
+            driveId: getConfig().REACT_APP_ROOT_DRIVE_ID,
           });
           console.debug(`SearchByQuery allDrives (page #${i + 1})`, fieldValue, resp.result);
           if (reqRef.current !== checkpoint) {
