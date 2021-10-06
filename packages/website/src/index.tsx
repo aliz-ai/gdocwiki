@@ -36,17 +36,19 @@ async function main() {
           apiKey: getConfig().REACT_APP_GAPI_KEY,
           clientId: getConfig().REACT_APP_GAPI_CLIENT_ID,
           discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
-          scope: 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/documents',
+          scope:
+            'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/documents.readonly',
           hosted_domain: getConfig().REACT_APP_GAPI_HOSTED_DOMAIN,
           cookie_policy: getConfig().REACT_APP_GAPI_COOKIE_POLICY,
         };
 
         await gapi.client.init(initConfig);
+        const isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get();
 
         ReactDOM.render(
           <React.StrictMode>
             <Provider store={store}>
-              <App />
+              <App isSignedIn={isSignedIn} />
             </Provider>
           </React.StrictMode>,
           document.getElementById('root')
