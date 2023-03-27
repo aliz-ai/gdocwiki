@@ -42,7 +42,7 @@ jobs:
           REACT_APP_NAME: "Aliz Wiki"
 
       - name: Deploy
-        uses: google-github-actions/deploy-appengine@0.8.2
+        uses: google-github-actions/deploy-appengine@v0.8.2
         with:
           working_directory: ./packages/website
           credentials: ${{ secrets.GCP_CREDENTIALS }}
