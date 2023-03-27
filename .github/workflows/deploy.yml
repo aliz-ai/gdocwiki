@@ -12,9 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Prepare Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: 12.x
+          node-version: lts/*
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -42,7 +42,7 @@ jobs:
           REACT_APP_NAME: "Aliz Wiki"
 
       - name: Deploy
-        uses: google-github-actions/deploy-appengine@main
+        uses: google-github-actions/deploy-appengine@0.8.2
         with:
           working_directory: ./packages/website
           credentials: ${{ secrets.GCP_CREDENTIALS }}
