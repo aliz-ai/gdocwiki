@@ -12,7 +12,7 @@ export let userProfile: UserProfile | null = null;
 export const isUserSignedIn = () => !!googleAccessToken?.access_token;
 
 const parseJwt = (token: string) => {
-  var base64Url = token.split('.')[1];
+var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   var jsonPayload = decodeURIComponent(
     window
@@ -51,6 +51,7 @@ const getAccessToken = () =>
     const tokenClient = google.accounts.oauth2.initTokenClient({
       client_id: getConfig().REACT_APP_GAPI_CLIENT_ID,
       hint: userProfile?.email,
+      prompt: userProfile?.email ? 'none' : 'consent',
       scope:
         'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/documents.readonly',
       callback,
