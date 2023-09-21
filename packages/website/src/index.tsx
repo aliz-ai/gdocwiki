@@ -1,7 +1,6 @@
-import { InlineLoading } from 'carbon-components-react';
+import { InlineLoading, ListItem, UnorderedList } from 'carbon-components-react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { get } from 'lodash';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -22,11 +21,31 @@ async function reportManifestUrl() {
   console.log('Manifest url stored');
 }
 
-export async function setupGapi() {
+export const LoadingReport = (props: { messages: string[] }) => {
+  const latestMessage = props.messages[props.messages.length - 1];
+  const oldMessages = props.messages.slice(0, props.messages.length - 1);
+  return (
+    <div>
+    
+      <UnorderedList>
+        {oldMessages.map((msg, i) => (
+          <ListItem key={i}>{msg}</ListItem>
+          ))}
+      </UnorderedList>
+      <InlineLoading description={latestMessage} />
+      <div id="google-signin-button" />
+    </div>
+  );
+};
+
+export async function setupGapi(reportProgress: (msg: string) => void) {
+  reportProgress('Checking if google API SDK is loaded');
   if (!gapi) {
+    reportProgress('Google API SDK is not found');
     throw new Error('gapi is not defined');
   }
 
+  reportProgress('Loading google API Client SDK');
   await new Promise((resolve, reject) =>
     gapi.load('client', { callback: resolve, onerror: reject })
   );
@@ -37,27 +56,37 @@ export async function setupGapi() {
     hosted_domain: getConfig().REACT_APP_GAPI_HOSTED_DOMAIN,
     cookie_policy: getConfig().REACT_APP_GAPI_COOKIE_POLICY,
   };
+
+  reportProgress('Initializing google Drive API definitions');
   await gapi.client.load('drive', 'v3');
+
+  reportProgress('Shaving yaks on the mountain');
+
+  reportProgress('Initializing google API');
   await gapi.client.init(initConfig);
 }
 
 async function main() {
+  const messages: string[] = [];
+
+  const reportProgress = (msg: string) => {
+    console.log(msg);
+    messages.push(msg);
+    ReactDOM.render(<LoadingReport messages={messages} />, document.getElementById('root'));
+  };
+
   if (!gapi) {
     ReactDOM.render(
       <InlineLoading description="Error. Please reload" />,
       document.getElementById('root')
     );
   }
+  reportProgress('Loading Google API...');
 
-  ReactDOM.render(
-    <InlineLoading description="Loading Google API..." />,
-    document.getElementById('root')
-  );
-  
   try {
-    await loadConfig();
-    await setupGapi();
-    await setupGoogleAuth();
+    await loadConfig(reportProgress);
+    await setupGapi(reportProgress);
+    await setupGoogleAuth(reportProgress);
 
     const isSignedIn = isUserSignedIn();
 
@@ -72,12 +101,21 @@ async function main() {
   } catch (ex) {
     console.error(ex);
     ReactDOM.render(
-      <InlineLoading description="Error. Please reload" />,
+      <InlineLoading
+        description={
+          <>
+            Error. Please reload.
+            <code>
+              <pre>{JSON.stringify(ex)}</pre>
+            </code>
+          </>
+        }
+      />,
       document.getElementById('root')
     );
   }
 
-  reportManifestUrl();
+  //reportManifestUrl();
   dayjs.extend(relativeTime);
   registerIcons();
 }

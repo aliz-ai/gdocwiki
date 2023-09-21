@@ -42,7 +42,7 @@ describe('parseDriveLink', () => {
   });
 
   it('unrecognized domain', () => {
-    const badDomain = 'https://google.com/document/d/1jK7lKUuJWxf0dV-Rd0d2Rb5SWHXveaevqzRKARkqLfo/'
+    const badDomain = 'https://google.com/document/d/1jK7lKUuJWxf0dV-Rd0d2Rb5SWHXveaevqzRKARkqLfo/';
     expect(parseDriveLink(badDomain)).toEqual(null);
   });
 

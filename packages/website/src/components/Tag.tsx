@@ -55,7 +55,15 @@ function LinkTag({ text }: ITagProps) {
 
 Tag.Link = React.memo(LinkTag);
 
-export function Tags({ file, style, add = false }: { file: DriveFile, add?: boolean, style?: React.CSSProperties }) {
+export function Tags({
+  file,
+  style,
+  add = false,
+}: {
+  file: DriveFile;
+  add?: boolean;
+  style?: React.CSSProperties;
+}) {
   const tags = useMemo(() => extractTags(file), [file]);
 
   if (tags.length === 0) {

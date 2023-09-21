@@ -3,7 +3,7 @@ plugins:
   - prettier
 rules:
   jsx-a11y/anchor-is-valid: off
-  prettier/prettier: warn
+  prettier/prettier: off
   import/order:
     - warn
     - newlines-between: never

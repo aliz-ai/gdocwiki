@@ -1,6 +1,6 @@
 # gdocwiki
 
-A wiki based on Google Doc / Drive.
+A wiki based on Google Doc / Drive tailored to Aliz needs
 
 ## Overview
 

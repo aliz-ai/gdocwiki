@@ -52,7 +52,7 @@ type DriveFileLookup = { [fileId: string]: DriveFile };
 async function linkPreview(
   baseEl: HTMLElement,
   driveFileLookup?: DriveFileLookup
-): Promise<{ driveLinks: DriveLink[], externalLinks: ExternalLink[] }> {
+): Promise<{ driveLinks: DriveLink[]; externalLinks: ExternalLink[] }> {
   const files: { [fileId: string]: DriveFile } = driveFileLookup ?? {};
   const driveLinks: DriveLink[] = [];
   const externalLinks: ExternalLink[] = [];
@@ -203,7 +203,7 @@ function DocPage({ match, file, renderStackOffset = 0 }: IDocPageProps) {
       // Translation is already enabled and now opening the doc.
       // This is not entirely reliable because we don't know how long translation will take.
       // We could listen for inner mutations indicating a translation update.
-      const docObserver = new MutationObserver(function (mutationList: MutationRecord[] ) {
+      const docObserver = new MutationObserver(function (mutationList: MutationRecord[]) {
         for (const mutation of mutationList) {
           if (mutation.type === 'childList') {
             for (const node of mutation.addedNodes) {
@@ -254,7 +254,7 @@ function DocPage({ match, file, renderStackOffset = 0 }: IDocPageProps) {
         setDocHtmlChangesFinished(true);
       });
     },
-    [readyForLinkPreview, dispatch],
+    [readyForLinkPreview, dispatch]
   );
 
   useEffect(
@@ -325,7 +325,7 @@ function DocPage({ match, file, renderStackOffset = 0 }: IDocPageProps) {
               fileId: file.id!,
               mimeType: 'application/zip',
             });
-            const decompressed = unzipSync(strToUint8Array(resp.body), {})
+            const decompressed = unzipSync(strToUint8Array(resp.body), {});
             console.debug('DocPage files.export zip', file.id, Object.keys(decompressed));
             let html = '';
             let css = '';
@@ -511,7 +511,7 @@ function DocPage({ match, file, renderStackOffset = 0 }: IDocPageProps) {
 
         const commentLookup: { [text: string]: gapi.client.drive.Comment[] } = {};
         for (const comment of apiComments) {
-          const text = removeSpace(comment.content ?? '')
+          const text = removeSpace(comment.content ?? '');
           const multi = commentLookup[text];
           if (multi) {
             multi.push(comment);
@@ -613,7 +613,7 @@ function DocPage({ match, file, renderStackOffset = 0 }: IDocPageProps) {
                   replies[i] = { ...reply, htmlContent: html };
                 }
               }
-              apiComment = { ...apiComment, replies }
+              apiComment = { ...apiComment, replies };
             }
 
             newComments.push({
@@ -810,7 +810,8 @@ function scrollWithOffset(link: HTMLElement, fixedOffset = 100) {
     return;
   }
   // Add a fixedOffset to give some room before the comments
-  const scrollToY = window.pageYOffset + fixedOffset + (0.5 - fractionFromBottom) * window.innerHeight;
+  const scrollToY =
+    window.pageYOffset + fixedOffset + (0.5 - fractionFromBottom) * window.innerHeight;
   console.log('scrollWithOffset', scrollToY, fixedOffset, window.pageYOffset);
   window.scrollTo(window.pageXOffset, scrollToY);
 }
@@ -842,7 +843,8 @@ function CommentView(props: CommentViewProps): JSX.Element {
             data-__gdoc_id={props.fileId}
             href={`/view/${props.fileId}/edit/?disco=${comment.id}`}
             style={{ textDecoration: 'none' }}
-            title="view in doc">
+            title="view in doc"
+          >
             <em>{comment.quotedFileContent?.value}</em>
           </a>
         </span>

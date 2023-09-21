@@ -118,7 +118,7 @@ export default function useLoadDriveFiles() {
         }
         const parentId = file.parents?.[0];
         if (parentId) {
-          loadDriveFromParent(parentId)
+          loadDriveFromParent(parentId);
         }
       }
 

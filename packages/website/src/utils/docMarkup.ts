@@ -223,7 +223,7 @@ function fixPaddingLi(li: HTMLLIElement): boolean {
 
 // Highlight commented text just as in Google Docs.
 // Link to the comment text at the bottom of the doc.
-function highlightAndLinkComment(sup: HTMLElement){
+function highlightAndLinkComment(sup: HTMLElement) {
   const supLink = sup.children?.[0];
   if (supLink?.id.startsWith('cmnt_')) {
     const span = sup.previousElementSibling as HTMLElement;

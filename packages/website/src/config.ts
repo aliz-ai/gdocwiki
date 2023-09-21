@@ -27,18 +27,17 @@ export interface INavMenuGroupChildrenDivider {
 }
 
 const config = {
-  REACT_APP_USE_CONFIG_FILE: process.env.REACT_APP_USE_CONFIG_FILE === '1',
+  REACT_APP_USE_CONFIG_FILE: import.meta.env.VITE_APP_USE_CONFIG_FILE === '1',
   // The G Suite domain to which users must belong to sign in
-  REACT_APP_GAPI_HOSTED_DOMAIN: process.env.REACT_APP_GAPI_HOSTED_DOMAIN ?? '',
-  REACT_APP_GAPI_COOKIE_POLICY: process.env.REACT_APP_GAPI_COOKIE_POLICY ?? 'single_host_origin',
-  REACT_APP_GAPI_KEY: process.env.REACT_APP_GAPI_KEY ?? '',
-  REACT_APP_GAPI_CLIENT_ID: process.env.REACT_APP_GAPI_CLIENT_ID ?? '',
-  REACT_APP_ROOT_ID: process.env.REACT_APP_ROOT_ID ?? '',
-  // Ued to list all files in a fast way.
-  REACT_APP_ROOT_DRIVE_ID: process.env.REACT_APP_ROOT_DRIVE_ID ?? '',
+  REACT_APP_GAPI_HOSTED_DOMAIN: import.meta.env.VITE_APP_GAPI_HOSTED_DOMAIN ?? '',
+  REACT_APP_GAPI_COOKIE_POLICY: import.meta.env.VITE_APP_GAPI_COOKIE_POLICY ?? 'single_host_origin',
+  REACT_APP_GAPI_KEY: import.meta.env.VITE_APP_GAPI_KEY ?? '',
+  REACT_APP_GAPI_CLIENT_ID: import.meta.env.VITE_APP_GAPI_CLIENT_ID ?? '',
+  REACT_APP_ROOT_ID: import.meta.env.VITE_APP_ROOT_ID ?? '',
+  REACT_APP_ROOT_DRIVE_ID: import.meta.env.VITE_APP_ROOT_DRIVE_ID ?? '',
   // This is not an app name but instead the name of the location of the REACT_APP_ROOT_*
-  REACT_APP_NAME: process.env.REACT_APP_NAME ?? '',
-  APP_NAME: process.env.APP_NAME ?? 'Gdoc Wiki',
+  REACT_APP_NAME: import.meta.env.VITE_APP_NAME ?? '',
+  APP_NAME: import.meta.env.VITE_APP_NAME ?? 'Gdoc Wiki',
 
   DEFAULT_FILE_FIELDS:
     'nextPageToken, files(properties, appProperties, name, id, driveId, parents, mimeType, modifiedTime, createdTime, lastModifyingUser(displayName, photoLink), iconLink, webViewLink, shortcutDetails, capabilities, starred)',
@@ -70,7 +69,8 @@ function loadSavedConfig() {
   return false;
 }
 
-export async function loadConfig() {
+export async function loadConfig(reportProgress: (msg: string) => void) {
+  reportProgress('Loading config');
   if (loadSavedConfig()) {
     // Update the config in the background.
     // On next reload the new config will be used.

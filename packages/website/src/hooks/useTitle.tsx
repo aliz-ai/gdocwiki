@@ -13,7 +13,7 @@ export default function useTitle<T>(titleBuilder: (T) => string | undefined, dep
   useEffect(() => {
     const conf = getConfig();
     const driveName = !rootId ? '' : mapIdToFile?.[rootId]?.name ?? '';
-     const isMyDrive = rootId === 'root' || driveName === 'My Drive';
+    const isMyDrive = rootId === 'root' || driveName === 'My Drive';
     const appName = conf.APP_NAME || 'Gdoc Wiki';
     const confDriveId = conf.REACT_APP_ROOT_DRIVE_ID;
     const locationName =
