@@ -53,7 +53,7 @@ async function main() {
     <InlineLoading description="Loading Google API..." />,
     document.getElementById('root')
   );
-  
+
   try {
     await loadConfig();
     await setupGapi();
@@ -72,7 +72,16 @@ async function main() {
   } catch (ex) {
     console.error(ex);
     ReactDOM.render(
-      <InlineLoading description="Error. Please reload" />,
+      <InlineLoading
+        description={
+          <>
+            Error. Please reload.
+            <code>
+              <pre>{JSON.stringify(ex)}</pre>
+            </code>
+          </>
+        }
+      />,
       document.getElementById('root')
     );
   }
