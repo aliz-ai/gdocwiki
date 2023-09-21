@@ -115,7 +115,7 @@ async function main() {
     );
   }
 
-  reportManifestUrl();
+  //reportManifestUrl();
   dayjs.extend(relativeTime);
   registerIcons();
 }

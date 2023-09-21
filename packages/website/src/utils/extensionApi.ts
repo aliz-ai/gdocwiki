@@ -13,4 +13,4 @@ const connection = connectToChild<GdocWiki.APIPortal.Methods>({
 });
 export const extConn = connection.promise;
 
-document.body.appendChild(iframe);
+//document.body.appendChild(iframe);
