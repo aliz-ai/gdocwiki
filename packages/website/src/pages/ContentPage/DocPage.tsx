@@ -1,4 +1,4 @@
-import { ArrowUp16, Close20 } from '@carbon/icons-react';
+import { ArrowUp, Close } from '@carbon/icons-react';
 import { InlineLoading } from 'carbon-components-react';
 import cx from 'classnames';
 import { unzipSync, strFromU8 } from 'fflate';
@@ -776,7 +776,7 @@ function DocPage({ match, file, renderStackOffset = 0 }: IDocPageProps) {
                   setViewingComment(null);
                 }}
               >
-                <Close20 />
+                <Close size={20} />
               </a>
               <h4>Comment</h4>
             </Stack>
@@ -834,7 +834,7 @@ function CommentView(props: CommentViewProps): JSX.Element {
       >
         {!props.hideLinkBack && (
           <a href={topHref} title="back to document">
-            <ArrowUp16 />
+            <ArrowUp />
           </a>
         )}
         <span>

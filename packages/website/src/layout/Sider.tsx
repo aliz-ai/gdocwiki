@@ -1,4 +1,4 @@
-import { CollapseAll16, Launch16 } from '@carbon/icons-react';
+import { CollapseAll, Launch } from '@carbon/icons-react';
 import { Accordion, AccordionItem, InlineLoading } from 'carbon-components-react';
 import TreeView, { TreeNode, TreeNodeProps } from 'carbon-components-react/lib/components/TreeView';
 import cx from 'classnames';
@@ -237,7 +237,7 @@ function nodeLabel(props: {
     case 'hidden_folder':
       label = (
         <Stack verticalAlign="center" horizontal tokens={{ childrenGap: 8 }}>
-          <CollapseAll16 />
+          <CollapseAll />
           <span>{file.name}</span>
         </Stack>
       );
@@ -250,7 +250,7 @@ function nodeLabel(props: {
           tokens={{ childrenGap: 8 }}
           style={{ cursor: 'pointer' }}
         >
-          <Launch16 />
+          <Launch/>
           <span>{parsedLink!.title}</span>
         </Stack>
       );

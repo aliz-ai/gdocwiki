@@ -1,4 +1,4 @@
-import { Edit16, Minimize16 } from '@carbon/icons-react';
+import { Edit, Minimize } from '@carbon/icons-react';
 import { Accordion, AccordionItem, InlineLoading } from 'carbon-components-react';
 import { Stack, TooltipHost } from 'office-ui-fabric-react';
 import React, { useMemo, useState, MouseEventHandler } from 'react';
@@ -143,7 +143,7 @@ function FolderPage({ file, shortCutFile, renderStackOffset = 0 }: IFolderPagePr
               {canEdit(readMeFile) && (
                 <TooltipHost content="edit">
                   <Link to={`/view/${readMeFile.id}/edit`}>
-                    <Edit16 />
+                    <Edit />
                   </Link>
                 </TooltipHost>
               )}
@@ -209,7 +209,7 @@ function FileListTableShrinkable(props: ITableShrinkToList & IFileListTableProps
       {clickShrinkToList && (
         <TooltipHost content="shrink to list view" styles={{ root: { alignSelf: 'center' } }}>
           <a href="#" title="expand" onClick={clickShrinkToList} style={{ marginLeft: '0.3em' }}>
-            <Minimize16 />
+            <Minimize />
           </a>
         </TooltipHost>
       )}

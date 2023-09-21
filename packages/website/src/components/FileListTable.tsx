@@ -1,4 +1,4 @@
-import { StarFilled16 } from '@carbon/icons-react';
+import { StarFilled } from '@carbon/icons-react';
 import dayjs from 'dayjs';
 import { IColumn, Stack, StackItem } from 'office-ui-fabric-react';
 import { useCallback, useMemo } from 'react';
@@ -41,7 +41,7 @@ export function FileListTable(props: IFileListTableProps) {
             <FileLink file={file} openInNewWindow={openInNewWindow}>
               <DriveFileName file={file} />
             </FileLink>
-            {file.starred && <StarFilled16 />}
+            {file.starred && <StarFilled />}
             <Tags file={file} />
             {props.hierarchy && <FileBreadcrumb file={file} foldersOnly={true} />}
           </Stack>

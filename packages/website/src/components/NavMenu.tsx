@@ -1,6 +1,6 @@
 // Modified from https://github.com/carbon-design-system/gatsby-theme-carbon/blob/ed2df93443b3aa9230e1162e6759c61fab90cca5/packages/gatsby-theme-carbon/src/components/Switcher/Switcher.js
 
-import { Locked16 } from '@carbon/icons-react';
+import { Locked } from '@carbon/icons-react';
 import { Overwrite, ReactAnchorAttr } from 'carbon-components-react/typings/shared';
 import React from 'react';
 import styles from './NavMenu.module.scss';
@@ -48,7 +48,7 @@ const Link = ({ disabled, children, isInternal, element = 'a', ...rest }: ILinkP
     <li>
       <Element aria-disabled={disabled} role="button" tabIndex={-1} className={className} {...rest}>
         {children}
-        {isInternal && <Locked16 />}
+        {isInternal && <Locked />}
       </Element>
     </li>
   );

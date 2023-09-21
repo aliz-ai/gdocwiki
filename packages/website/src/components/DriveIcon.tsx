@@ -1,4 +1,4 @@
-import { Launch16 } from '@carbon/icons-react';
+import { Launch } from '@carbon/icons-react';
 import { DriveFile, mdLink, MimeTypes } from '../utils';
 
 export function DriveIcon({ file }: { file?: DriveFile }) {
@@ -7,7 +7,7 @@ export function DriveIcon({ file }: { file?: DriveFile }) {
   }
   const link = mdLink.parse(file.name);
   if (link) {
-    return <Launch16 />;
+    return <Launch />;
   }
 
   let src = file.iconLink ?? '';

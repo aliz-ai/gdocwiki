@@ -9,7 +9,7 @@ import { getManifestInfo, ManifestDrive, ManifestData } from '../utils/manifest'
 import ReactDOM from 'react-dom';
 import { useEffect, useState, useMemo } from 'react';
 import { useToken } from '../utils/hooks/oauth';
-import { Folders16, Launch16, WarningAltFilled16 } from '@carbon/icons-react';
+import { Folders, Launch, WarningAltFilled } from '@carbon/icons-react';
 import Button from 'carbon-components-react/lib/components/Button';
 import { log } from '../utils/log';
 
@@ -427,14 +427,14 @@ function App(props: { id: string }) {
       <SharedExternally shares={sharedExternally} />
       {fileInfo.isOrphanAndOwner && (
         <span className={cx(styles.tag, styles.warning)}>
-          <WarningAltFilled16 style={{ marginRight: 6 }} />
+          <WarningAltFilled style={{ marginRight: 6 }} />
           Not in a shared drive
         </span>
       )}
       {fileInfo.privateOwners && <PrivateOwners id={props.id} token={token} privateOwners={fileInfo.privateOwners} />}
       {parentTree && <Folders file={fileInfo.file} parentTree={parentTree} />}
       <a href={fileInfo.file.url} target="_blank" rel="noreferrer" className={styles.wikiTreeIcon}>
-        <Launch16/>
+        <Launch/>
       </a>
     </>
   );
@@ -452,7 +452,7 @@ function Loading(props: { isTokenLoading?: boolean; token?: Token; }) {
       target="_blank"
       rel="noreferrer"
     >
-      <Launch16 style={{ marginRight: 6 }} />
+      <Launch style={{ marginRight: 6 }} />
       GdocWiki Extension Not Enabled
     </a>
   )
@@ -475,7 +475,7 @@ function SharedExternally(props: { shares?: gapi.client.drive.Permission[]; }) {
 
   return showExtra ?
   <>
-    <WarningAltFilled16 style={{ marginRight: 6 }} />
+    <WarningAltFilled style={{ marginRight: 6 }} />
     <span className={cx(styles.tag)} onClick={() => {setShowExtra(v => !v)}}>
       Shared externally to {shareSummary(props.shares[0])}
       {props.shares.length > 1 && (' and others')}
@@ -483,7 +483,7 @@ function SharedExternally(props: { shares?: gapi.client.drive.Permission[]; }) {
   </> :
   <>
     <Button className={cx(styles.tag, styles.warning)} onClick={() => {setShowExtra(v => !v)}}>
-      <WarningAltFilled16 style={{ marginRight: 6 }} />
+      <WarningAltFilled style={{ marginRight: 6 }} />
       Externally Shared
     </Button>
   </>
@@ -510,7 +510,7 @@ function PrivateOwners(props: { id: string, token: Token, privateOwners: gapi.cl
 
   return showExtra ?
   <>
-    <WarningAltFilled16 style={{ marginRight: 6 }} />
+    <WarningAltFilled style={{ marginRight: 6 }} />
     <span className={cx(styles.tag)} onClick={() => {setShowExtra(v => !v)}}>
       Owned by {privateOwners?.[0].displayName} {privateOwners?.[0].emailAddress}
     </span>
@@ -522,7 +522,7 @@ function PrivateOwners(props: { id: string, token: Token, privateOwners: gapi.cl
   </> :
   <>
     <Button className={cx(styles.tag, styles.warning)} onClick={() => {setShowExtra(v => !v)}}>
-      <WarningAltFilled16 style={{ marginRight: 6 }} />
+      <WarningAltFilled style={{ marginRight: 6 }} />
       Not in a shared drive
     </Button>
   </>
@@ -537,7 +537,7 @@ function Folders(props: {file: TreePathItem, parentTree: ParentTree}) {
   return (
     <div className={styles.wikiTree}>
       <a href={file.url} style={{ paddingRight: '3px', color: 'black' }} target="_blank" rel="noreferrer" className={styles.wikiTreeIcon}>
-        <Folders16 />
+        <Folders />
       </a>
       {parentTree.parents?.map((pi) => {
         return (

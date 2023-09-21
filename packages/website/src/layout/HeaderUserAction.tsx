@@ -1,4 +1,4 @@
-import { UserAvatar20 } from '@carbon/icons-react';
+import { UserAvatar } from '@carbon/icons-react';
 import { HeaderGlobalAction } from 'carbon-components-react';
 import React, { useMemo } from 'react';
 import Avatar from 'react-avatar';
@@ -18,7 +18,7 @@ function HeaderUserAction_() {
   if (!isSignedIn) {
     return (
       <HeaderGlobalAction aria-label="Sign In">
-        <UserAvatar20 />
+        <UserAvatar size={20} />
       </HeaderGlobalAction>
     );
   } else {

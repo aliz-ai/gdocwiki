@@ -1,4 +1,4 @@
-import { Add20, Close20, Menu20, Subtract20 } from '@carbon/icons-react';
+import { Add, Close, Menu, Subtract } from '@carbon/icons-react';
 import { Header, HeaderGlobalAction, HeaderGlobalBar } from 'carbon-components-react';
 import Trigger from 'rc-trigger';
 import { useCallback, useState } from 'react';
@@ -89,12 +89,12 @@ function App(props: { isSignedIn: boolean }) {
           <Header aria-label="global actions">
             {!sidebarOpen && (
               <HeaderGlobalAction key="open" aria-label="Open TOC" onClick={handleOpenTOC}>
-                <Menu20 />
+                <Menu size={20} />
               </HeaderGlobalAction>
             )}
             {sidebarOpen && [
               <HeaderGlobalAction key="close" aria-label="Close TOC" onClick={handleCloseTOC}>
-                <Close20 />
+                <Close size={20} />
               </HeaderGlobalAction>,
               <HeaderGlobalAction
                 key="expand"
@@ -102,7 +102,7 @@ function App(props: { isSignedIn: boolean }) {
                 onClick={handleTreeExpand}
                 className={responsiveStyle.hideInPhone}
               >
-                <Add20 />
+                <Add size={20} />
               </HeaderGlobalAction>,
               <HeaderGlobalAction
                 key="collapse"
@@ -110,7 +110,7 @@ function App(props: { isSignedIn: boolean }) {
                 onClick={handleTreeCollapse}
                 className={responsiveStyle.hideInPhone}
               >
-                <Subtract20 />
+                <Subtract size={20} />
               </HeaderGlobalAction>,
             ]}
             <HeaderTitle />
