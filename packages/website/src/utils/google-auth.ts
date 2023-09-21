@@ -1,3 +1,4 @@
+import { report } from 'process';
 import { getConfig } from '../config';
 
 interface UserProfile {
@@ -27,7 +28,14 @@ const parseJwt = (token: string) => {
   return JSON.parse(jsonPayload);
 };
 
-const getGoogleIdToken = () =>
+const renderSignInButton = () => { 
+  google.accounts.id.renderButton(
+    document.getElementById("google-signin-button")!,
+    { theme: "outline", size: "large", type: 'standard' } 
+  );
+}
+
+const getGoogleIdToken = (reportProgress?: (msg: string) => void) =>
   new Promise<google.accounts.id.CredentialResponse>((resolve) => {
     google.accounts.id.initialize({
       client_id: getConfig().REACT_APP_GAPI_CLIENT_ID,
@@ -39,7 +47,19 @@ const getGoogleIdToken = () =>
         resolve(response);
       },
     });
-    google.accounts.id.prompt();
+    google.accounts.id.prompt(noti => {
+      if (noti.isDisplayMoment() && noti.isNotDisplayed()) {
+        reportProgress?.(`We couldn't show you the google account selection popup because of ${noti.getNotDisplayedReason()}`)
+        reportProgress?.(`Please click the button below to sign in`)
+        renderSignInButton();
+      }
+      if(noti.isSkippedMoment()) {
+        reportProgress?.(`You skipped the google account selection popup ${noti.getSkippedReason()}}`)
+      }
+      if (noti.isDismissedMoment()) {
+        reportProgress?.(`Popup dismissed, because ${noti.getDismissedReason()}`)
+      }
+    });
   });
 
 const getAccessToken = (forceConsent: boolean) =>
@@ -70,7 +90,7 @@ export async function setupGoogleAuth(reportProgress?: (msg: string) => void) {
   }
   try {
     reportProgress?.('Searching for logged in User');
-    await getGoogleIdToken();
+    await getGoogleIdToken(reportProgress);
     reportProgress?.('Aquiring Access for Google Drive (might require consent in a popup)');
     const tokenResponse = await getAccessToken(false);
     if (tokenResponse.access_token) {

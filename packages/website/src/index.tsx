@@ -26,12 +26,14 @@ export const LoadingReport = (props: { messages: string[] }) => {
   const oldMessages = props.messages.slice(0, props.messages.length - 1);
   return (
     <div>
+    
       <UnorderedList>
         {oldMessages.map((msg, i) => (
           <ListItem key={i}>{msg}</ListItem>
-        ))}
+          ))}
       </UnorderedList>
       <InlineLoading description={latestMessage} />
+      <div id="google-signin-button" />
     </div>
   );
 };
