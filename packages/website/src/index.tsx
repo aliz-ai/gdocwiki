@@ -4,13 +4,20 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './App';
 import { getConfig, loadConfig } from './config';
 import './global.carbon.scss';
 import './global.index.scss';
 import { registerIcons, store } from './utils';
 import { extConn } from './utils/extensionApi';
 import { isUserSignedIn, setupGoogleAuth } from './utils/google-auth';
+
+const appPromise = import('./App')
+const App = React.lazy(() => appPromise);
+
+const LazyApp = (props: {isSignedIn: boolean}) => (
+  <React.Suspense fallback={<InlineLoading description="Loading..." />}>
+    <App isSignedIn={props.isSignedIn} />
+  </React.Suspense>)
 
 async function reportManifestUrl() {
   // TODO: Maybe infer manifest url from config is better.
@@ -93,7 +100,7 @@ async function main() {
     ReactDOM.render(
       <React.StrictMode>
         <Provider store={store}>
-          <App isSignedIn={isSignedIn} />
+          <LazyApp isSignedIn={isSignedIn} />
         </Provider>
       </React.StrictMode>,
       document.getElementById('root')

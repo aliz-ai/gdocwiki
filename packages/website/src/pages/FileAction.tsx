@@ -1,4 +1,4 @@
-import { View16, Edit16 } from '@carbon/icons-react';
+import { View, Edit } from '@carbon/icons-react';
 import fileEdit from '@iconify-icons/mdi/file-edit';
 import { Icon } from '@iconify/react';
 import dayjs from 'dayjs';
@@ -355,9 +355,9 @@ function FileAction(props: { file: DriveFile; allOverflow?: boolean }) {
                 itemKey="view"
                 onRenderItemLink={tooltip('view', <Icon icon={fileEdit} />)}
               />
-              <PivotItem itemKey="preview" onRenderItemLink={tooltip('preview', <View16 />)} />
+              <PivotItem itemKey="preview" onRenderItemLink={tooltip('preview', <View />)} />
               {showEditLink && (
-                <PivotItem itemKey="edit" onRenderItemLink={tooltip('edit', <Edit16 />)} />
+                <PivotItem itemKey="edit" onRenderItemLink={tooltip('edit', <Edit />)} />
               )}
             </Pivot>
           </Stack.Item>

@@ -1,4 +1,4 @@
-import { ChevronDown20 } from '@carbon/icons-react';
+import { ChevronDown } from '@carbon/icons-react';
 import { HeaderMenuItem, HeaderNavigation } from 'carbon-components-react';
 import TreeView, { TreeNode } from 'carbon-components-react/lib/components/TreeView';
 import cx from 'classnames';
@@ -65,7 +65,7 @@ export function HeaderExtraActions({ onExtensionAction }) {
                 <HeaderMenuItem onClick={(ev) => ev.preventDefault()} href="#">
                   <Stack verticalAlign="center" horizontal tokens={{ childrenGap: 8 }}>
                     <span>{item.text ?? ''}</span>
-                    <ChevronDown20 />
+                    <ChevronDown size={20} />
                   </Stack>
                 </HeaderMenuItem>
               </Trigger>
