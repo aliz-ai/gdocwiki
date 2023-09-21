@@ -8,8 +8,8 @@ interface ImportMetaEnv {
 
   readonly VITE_APP_GAPI_COOKIE_POLICY: string;
   readonly VITE_APP_GAPI_HOSTED_DOMAIN: string;
-    readonly VITE_APP_USE_CONFIG_FILE: string;
-    readonly VITE_APP_NAME: string;
+  readonly VITE_APP_USE_CONFIG_FILE: string;
+  readonly VITE_APP_NAME: string;
 }
 
 interface ImportMeta {

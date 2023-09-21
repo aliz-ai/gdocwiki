@@ -6,9 +6,7 @@ export default defineConfig({
   root: 'src',
   envDir: '../',
   publicDir: '../public',
-  plugins: [
-    react(),
-  ],
+  plugins: [react()],
   server: {
     port: 3000,
   },

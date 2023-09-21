@@ -160,9 +160,7 @@ export function showMoveFile(parentFolder: DriveFile) {
         .addView(teamDocsView)
         .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
         .enableFeature(google.picker.Feature.SUPPORT_TEAM_DRIVES)
-        .setOAuthToken(
-          googleAccessToken?.access_token ?? ''
-        )
+        .setOAuthToken(googleAccessToken?.access_token ?? '')
         .setDeveloperKey(getConfig().REACT_APP_GAPI_KEY)
         .setCallback(async (data) => {
           if (data.action === google.picker.Action.PICKED && (data?.docs?.length ?? 0) > 0) {

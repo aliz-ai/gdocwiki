@@ -51,7 +51,7 @@ function Revisions(props: { file: DriveFile }) {
     const fields = 'revisions(id, modifiedTime, lastModifyingUser, exportLinks)';
     async function loadRevisions() {
       try {
-        const resp = await gapi.client.drive.revisions.list({ fileId: file.id!, fields })
+        const resp = await gapi.client.drive.revisions.list({ fileId: file.id!, fields });
         setRevisions(resp.result.revisions!.reverse());
       } catch (e) {
         console.error('DocPage files.revisions', file, e);
@@ -91,14 +91,14 @@ function Revisions(props: { file: DriveFile }) {
               </span>
             </div>
           </Stack>
-        )
+        );
       })}
       <hr />
     </div>
   );
 }
 
-function FileAction(props: { file: DriveFile, allOverflow?: boolean }) {
+function FileAction(props: { file: DriveFile; allOverflow?: boolean }) {
   const [revisionsEnabled, setRevisionsEnabled] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();

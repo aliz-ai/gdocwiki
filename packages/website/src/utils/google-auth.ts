@@ -65,25 +65,27 @@ export async function setupGoogleAuth(reportProgress?: (msg: string) => void) {
   reportProgress?.('Setting up Google Auth');
   clearTimeout(refreshTimeoutHandle);
   if (!google) {
-    reportProgress?.('GSI is not defined')
+    reportProgress?.('GSI is not defined');
     throw new Error('google(gsi) is not defined');
   }
   try {
-    reportProgress?.('Searching for logged in User')
+    reportProgress?.('Searching for logged in User');
     await getGoogleIdToken();
-    reportProgress?.('Aquiring Access for Google Drive (might require consent in a popup)')
+    reportProgress?.('Aquiring Access for Google Drive (might require consent in a popup)');
     const tokenResponse = await getAccessToken(false);
     if (tokenResponse.access_token) {
-      reportProgress?.('Access token aquired')
-      gapi.client.setToken({ access_token: tokenResponse.access_token});
+      reportProgress?.('Access token aquired');
+      gapi.client.setToken({ access_token: tokenResponse.access_token });
     } else {
-      reportProgress?.('Seems like we need another permissions. Please review your consent in the popup')
+      reportProgress?.(
+        'Seems like we need another permissions. Please review your consent in the popup'
+      );
       const tokenResponse = await getAccessToken(true);
       if (tokenResponse.access_token) {
-        reportProgress?.('Access token aquired')
+        reportProgress?.('Access token aquired');
         gapi.client.setToken({ access_token: tokenResponse.access_token });
       } else {
-        reportProgress?.('No access token aquired')
+        reportProgress?.('No access token aquired');
         throw new Error('No access token aquired');
       }
     }
@@ -101,9 +103,9 @@ export async function setupGoogleAuth(reportProgress?: (msg: string) => void) {
 export const signOut = async () => {
   google.accounts.id.disableAutoSelect();
   googleIdToken = null;
-  await setupGoogleAuth(()=> undefined);
+  await setupGoogleAuth(() => undefined);
 };
 
 export const signIn = async (ev: any) => {
-  await setupGoogleAuth(()=> undefined);
+  await setupGoogleAuth(() => undefined);
 };

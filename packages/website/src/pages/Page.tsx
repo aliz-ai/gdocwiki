@@ -95,7 +95,7 @@ function PageId(props: PageProps & { id: string }) {
                 <StackItem key="fileaction" grow={1}>
                   <FileAction file={file} key={file.id} allOverflow={true} />
                 </StackItem>
-                <StackItem key="breadcrumb" grow={11} styles={{ root: { fontSize: '16px' }}}>
+                <StackItem key="breadcrumb" grow={11} styles={{ root: { fontSize: '16px' } }}>
                   <FileBreadcrumb file={file} />
                 </StackItem>
               </Stack>
@@ -124,7 +124,7 @@ function PageId(props: PageProps & { id: string }) {
   }
 }
 
-function RecentChanges({ file, docMode }: { file: DriveFile, docMode: DocMode }) {
+function RecentChanges({ file, docMode }: { file: DriveFile; docMode: DocMode }) {
   if ((docMode && docMode !== 'view') || file.mimeType === MimeTypes.GoogleFolder) {
     return null;
   }

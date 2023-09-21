@@ -12,7 +12,7 @@ import {
   IFolderListProps,
 } from '../../components';
 import { useManagedRenderStack } from '../../context/RenderStack';
-import { useFolderFilesMeta, IFolderFilesMeta  } from '../../hooks/useFolderFilesMeta';
+import { useFolderFilesMeta, IFolderFilesMeta } from '../../hooks/useFolderFilesMeta';
 import { selectMapIdToFile, selectMapIdToChildren } from '../../reduxSlices/files';
 import { DriveFile, FolderChildrenDisplayMode, canEdit } from '../../utils';
 import styles from './FolderPage.module.scss';

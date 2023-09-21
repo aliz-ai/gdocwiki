@@ -65,7 +65,7 @@ function PreviewPage({ file, versions, renderStackOffset = 0 }: IPreviewPageProp
       setIsLoading(false);
     };
     ref.current.addEventListener('load', cb);
-    const timeout = setTimeout(function(){
+    const timeout = setTimeout(function () {
       setIsLoading(false);
     }, 10000);
     const addedRef = ref.current;
