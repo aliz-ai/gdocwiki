@@ -69,7 +69,8 @@ function loadSavedConfig() {
   return false;
 }
 
-export async function loadConfig() {
+export async function loadConfig(reportProgress: (msg: string) => void) {
+  reportProgress('Loading config');
   if (loadSavedConfig()) {
     // Update the config in the background.
     // On next reload the new config will be used.

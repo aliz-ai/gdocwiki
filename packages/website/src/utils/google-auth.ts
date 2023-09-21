@@ -42,7 +42,7 @@ const getGoogleIdToken = () =>
     google.accounts.id.prompt();
   });
 
-const getAccessToken = () =>
+const getAccessToken = (forceConsent: boolean) =>
   new Promise<google.accounts.oauth2.TokenResponse>((resolve) => {
     const callback = (response: google.accounts.oauth2.TokenResponse) => {
       googleAccessToken = response;
@@ -51,7 +51,7 @@ const getAccessToken = () =>
     const tokenClient = google.accounts.oauth2.initTokenClient({
       client_id: getConfig().REACT_APP_GAPI_CLIENT_ID,
       hint: userProfile?.email,
-      prompt: userProfile?.email ? 'none' : 'consent',
+      prompt: !userProfile?.email || forceConsent ? 'consent' : '',
       scope:
         'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/documents.readonly',
       callback,
@@ -61,15 +61,32 @@ const getAccessToken = () =>
 
 let refreshTimeoutHandle: number | undefined;
 
-export async function setupGoogleAuth() {
+export async function setupGoogleAuth(reportProgress?: (msg: string) => void) {
+  reportProgress?.('Setting up Google Auth');
   clearTimeout(refreshTimeoutHandle);
   if (!google) {
+    reportProgress?.('GSI is not defined')
     throw new Error('google(gsi) is not defined');
   }
   try {
+    reportProgress?.('Searching for logged in User')
     await getGoogleIdToken();
-    const tokenResponse = await getAccessToken();
-    gapi.client.setToken(tokenResponse);
+    reportProgress?.('Aquiring Access for Google Drive (might require consent in a popup)')
+    const tokenResponse = await getAccessToken(false);
+    if (tokenResponse.access_token) {
+      reportProgress?.('Access token aquired')
+      gapi.client.setToken({ access_token: tokenResponse.access_token});
+    } else {
+      reportProgress?.('Seems like we need another permissions. Please review your consent in the popup')
+      const tokenResponse = await getAccessToken(true);
+      if (tokenResponse.access_token) {
+        reportProgress?.('Access token aquired')
+        gapi.client.setToken({ access_token: tokenResponse.access_token });
+      } else {
+        reportProgress?.('No access token aquired')
+        throw new Error('No access token aquired');
+      }
+    }
     // refresh accessToken after 55 minutes before it expires
     refreshTimeoutHandle = (setTimeout(setupGoogleAuth, 55 * 60 * 1000) as unknown) as number;
   } catch (error) {
@@ -84,9 +101,9 @@ export async function setupGoogleAuth() {
 export const signOut = async () => {
   google.accounts.id.disableAutoSelect();
   googleIdToken = null;
-  await setupGoogleAuth();
+  await setupGoogleAuth(()=> undefined);
 };
 
 export const signIn = async (ev: any) => {
-  await setupGoogleAuth();
+  await setupGoogleAuth(()=> undefined);
 };

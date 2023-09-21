@@ -1426,7 +1426,6 @@
     carbon-components-react "^7.24.0"
     carbon-icons "^7.0.7"
     classnames "^2.2.6"
-    cra-template "1.1.1"
     dayjs "^1.9.6"
     easings.scss "^0.3.1"
     eventemitter2 "^6.4.3"
@@ -5263,11 +5262,6 @@ cosmiconfig@^7.0.0:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.10.0"
-
-cra-template@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/cra-template/-/cra-template-1.1.1.tgz"
-  integrity sha512-L3lGLPpTiuaNEFxymnfIljFzik0a57iJN7eTw/2bT6NTwWtVhkh4bjDPWUJ5UJd6PqfmfJSkulIT5VpInynO5g==
 
 crc-32@^1.2.0:
   version "1.2.2"
@@ -13327,7 +13321,7 @@ react-app-rewire-multiple-entry@^2.2.1:
   dependencies:
     xxhashjs "^0.2.2"
 
-react-app-rewired@^2.1.8, react-app-rewired@^2.2.1:
+react-app-rewired@^2.1.8:
   version "2.2.1"
   resolved "https://registry.npmjs.org/react-app-rewired/-/react-app-rewired-2.2.1.tgz"
   integrity sha512-uFQWTErXeLDrMzOJHKp0h8P1z0LV9HzPGsJ6adOtGlA/B9WfT6Shh4j2tLTTGlXOfiVx6w6iWpp7SOC5pvk+gA==
