@@ -37,7 +37,7 @@ const config = {
   REACT_APP_ROOT_DRIVE_ID: import.meta.env.VITE_APP_ROOT_DRIVE_ID ?? '',
   // This is not an app name but instead the name of the location of the REACT_APP_ROOT_*
   REACT_APP_NAME: import.meta.env.VITE_APP_NAME ?? '',
-  APP_NAME: import.meta.env.VITE_APP_NAME ?? 'Gdoc Wiki',
+  APP_NAME: import.meta.env.VITE_APP_NAME ?? 'Aliz Wiki',
 
   DEFAULT_FILE_FIELDS:
     'nextPageToken, files(properties, appProperties, name, id, driveId, parents, mimeType, modifiedTime, createdTime, lastModifyingUser(displayName, photoLink), iconLink, webViewLink, shortcutDetails, capabilities, starred)',

@@ -59,7 +59,7 @@
     "@types/carbon-components-react": "^7.24.0",
     "@types/gapi": "^0.0.39",
     "@types/gapi.client.drive": "^3.0.13",
-    "@types/google.accounts": "^0.0.6",
+    "@types/google.accounts": "^0.0.14",
     "@types/google.picker": "^0.0.34",
     "@types/natural-compare-lite": "^1.4.0",
     "@types/node": "^14.14.10",
