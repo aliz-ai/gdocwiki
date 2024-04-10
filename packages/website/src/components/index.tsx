@@ -1,7 +1,5 @@
 export * from './DriveFileName';
 export * from './DriveIcon';
-export * from './ExtensionBanner';
-export * from './ExtensionHeaderItem';
 export * from './FileListTable';
 export * from './FileList';
 export * from './GapiErrorDisplay';

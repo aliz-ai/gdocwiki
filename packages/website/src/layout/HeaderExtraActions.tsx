@@ -6,16 +6,12 @@ import { Stack } from 'office-ui-fabric-react';
 import Trigger from 'rc-trigger';
 import React, { useMemo } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
-import { ExtensionHeaderItem, NavMenu } from '../components';
+import { NavMenu } from '../components';
 import { getConfig, INavMenuGroupChildren } from '../config';
 import styles from './HeaderExtraActions.module.scss';
 import responsiveStyle from './responsive.module.scss';
 
-export interface IHeaderExtraActionsProps {
-  onExtensionAction?: () => void;
-}
-
-export function HeaderExtraActions({ onExtensionAction }) {
+export function HeaderExtraActions() {
   return (
     <HeaderNavigation className={responsiveStyle.hideInPhone} aria-label="navigation">
       <HeaderMenuItem<LinkProps> element={Link} to="/search/tag">
@@ -74,7 +70,6 @@ export function HeaderExtraActions({ onExtensionAction }) {
             return null;
         }
       })}
-      <ExtensionHeaderItem onClick={onExtensionAction} />
     </HeaderNavigation>
   );
 }

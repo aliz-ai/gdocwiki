@@ -1,12 +1,10 @@
 import { Add, Close, Menu, Subtract } from '@carbon/icons-react';
 import { Header, HeaderGlobalAction, HeaderGlobalBar } from 'carbon-components-react';
 import Trigger from 'rc-trigger';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, Router, Switch, Route } from 'react-router-dom';
-import { useLocalStorage } from 'react-use';
-import { ExtensionBanner, GapiErrorDisplay } from './components';
-import { ExtInstallStatusProvider } from './context/ExtInstallStatus';
+import { GapiErrorDisplay } from './components';
 import { RenderStackProvider } from './context/RenderStack';
 import useLoadDriveFiles from './hooks/useLoadDriveFiles';
 import {
@@ -39,30 +37,6 @@ function DriveFilesLoader({ children }) {
   return <>{children}</>;
 }
 
-function useExtensionBannerController() {
-  const [isDismissed, setIsDismissed] = useLocalStorage('extension.banner.dismissed', false);
-  const [visible, setVisible] = useState(!isDismissed);
-
-  const handleDismiss = useCallback(
-    (ev: any) => {
-      ev?.preventDefault();
-      setIsDismissed(true);
-      setVisible(false);
-    },
-    [setIsDismissed]
-  );
-
-  const showBanner = useCallback(() => {
-    setVisible(true);
-  }, []);
-
-  return {
-    visible,
-    handleDismiss,
-    showBanner,
-  };
-}
-
 function App(props: { isSignedIn: boolean }) {
   const dispatch = useDispatch();
   const sidebarOpen = useSelector(selectSidebarOpen);
@@ -79,11 +53,7 @@ function App(props: { isSignedIn: boolean }) {
   }, [mapIdToFile, dispatch]);
   const handleTreeCollapse = useCallback(() => dispatch(collapseAll()), [dispatch]);
 
-  const extBannerCtrl = useExtensionBannerController();
-
   return (
-    <ExtInstallStatusProvider>
-      <ExtensionBanner visible={extBannerCtrl.visible} onDismiss={extBannerCtrl.handleDismiss} />
       <Router history={history}>
         <DriveFilesLoader>
           <Header aria-label="global actions">
@@ -114,7 +84,7 @@ function App(props: { isSignedIn: boolean }) {
               </HeaderGlobalAction>,
             ]}
             <HeaderTitle />
-            <HeaderExtraActions onExtensionAction={extBannerCtrl.showBanner} />
+            <HeaderExtraActions />
             <HeaderGlobalBar className={responsiveStyle.hideInPhone}>
               <HeaderSearch />
               <Trigger
@@ -196,7 +166,6 @@ function App(props: { isSignedIn: boolean }) {
           </Content>
         </DriveFilesLoader>
       </Router>
-    </ExtInstallStatusProvider>
   );
 }
 
