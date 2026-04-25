@@ -32,7 +32,7 @@
     "@gdocwiki/types": "0.1.0",
     "react-scripts": "4.0.2",
     "customize-cra": "^1.0.0",
-    "firebase-tools": "^9.10.0",
+    "firebase-tools": "^15.15.0",
     "react-app-rewire-multiple-entry": "^2.2.1",
     "react-app-rewired": "^2.1.8",
     "webpackbar": "^5.0.0-3"
